@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport"content ="width=device-width, initial-scale=1.0"/>
-  <title>MicroPOS - نقطة بيع</title>
+  <title>Muhammad Ali - محمد علي</title>
   <style>
     body {
       font-family: 'Tahoma', sans-serif;
@@ -207,16 +207,16 @@
 </head>
 <body>
 
-<header>نظام MicroPOS - نقطة بيع</header>
+<header>Muhammad Ali - محمد علي </header>
 
 <div id="mainMenu" class="container">
   <div class="card" onclick="showSection('inventorySection')">
     <img src="https://img.icons8.com/dusk/64/box.png" alt="المخزون" />
-    <div class="card-title">المخزون الأساسي</div>
+    <div class="card-title">الهواتف الجديده</div>
   </div>
   <div class="card" onclick="showSection('usedInventorySection')">
     <img src="https://img.icons8.com/dusk/64/open-box.png" alt="المستعمل" />
-    <div class="card-title">مخزن المستعمل</div>
+    <div class="card-title">الهواتف المستعمل</div>
   </div>
   <div class="card" onclick="showSection('salesSection')">
     <img src="https://img.icons8.com/dusk/64/shopping-cart.png" alt="المبيعات" />
@@ -273,8 +273,8 @@
   <button onclick="goBack()">رجوع</button>
   <h2>بيع جهاز</h2>
   <select id="sourceSelect" onchange="clearSaleInputs(); hideSuggestions();">
-    <option value="inventory">المخزون الأساسي</option>
-    <option value="used">مخزن المستعمل</option>
+    <option value="inventory"> الهواتف الجديده</option>
+    <option value="used">الهواتف المستعمل</option>
   </select>
   <div style="position: relative;">
     <input id="saleName" placeholder="اسم الجهاز" autocomplete="off" oninput="showSuggestions()" />
