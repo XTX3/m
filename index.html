@@ -2,690 +2,345 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"content ="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Muhammad Ali - محمد علي</title>
   <style>
-    body {
-      font-family: 'Tahoma', sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background-color: #4a90e2;
-      color: white;
-      padding: 1rem;
-      font-size: 1.5rem;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .card:hover {
-      transform: scale(1.05);
-    }
-    .card img {
-      width: 50px;
-      margin-bottom: 10px;
-    }
-    .card-title {
-      font-size: 1.1rem;
-    }
-    .section {
-      display: none;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      text-align: right;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      box-sizing: border-box;
-      font-size: 1rem;
-    }
-    table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-      background: #fff;
-      font-size: 0.9rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: center;
-      position: relative;
-    }
-    .btn-small {
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      margin: 0 3px;
-      cursor: pointer;
-      border-radius: 4px;
-      border: none;
-    }
-    .btn-edit {
-      background-color: #27ae60;
-      color: white;
-    }
-    .btn-delete {
-      background-color: #e74c3c;
-      color: white;
-    }
-    .btn-sell {
-      background-color: #2ecc71;
-      color: white;
-      font-weight: bold;
-    }
-    .action-buttons {
-      display: none;
-      gap: 5px;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-    }
-    .name-cell {
-      cursor: pointer;
-      position: relative;
-    }
-    .name-cell.show-actions .action-buttons {
-      display: flex;
-    }
-    /* ألوان الحالة */
-    .status-available {
-      color: darkgreen;
-      font-weight: bold;
-    }
-    .status-unavailable {
-      color: red;
-      font-weight: bold;
-    }
-    /* النافذة */
-    #editModal {
-      display: none;
-      position: fixed;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      display: flex;
-    }
-    #editModal.hidden {
-      display: none !important;
-    }
-    #editModal .modal-content {
-      background: white;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 15px;
-      padding: 20px;
-      text-align: right;
-      position: relative;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      animation: fadeInScale 0.3s ease forwards;
-    }
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    #editModal h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-weight: bold;
-      color: #4a90e2;
-    }
-    #editModal label {
-      display: block;
-      margin: 10px 0 5px 0;
-      font-weight: bold;
-      color: #333;
-    }
-    #editModal input, #editModal select {
-      font-size: 1rem;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1.5px solid #ddd;
-      transition: border-color 0.3s;
-      width: 100%;
-    }
-    #editModal input:focus, #editModal select:focus {
-      outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 6px #4a90e2;
-    }
-    #editModal .buttons {
-      margin-top: 20px;
-      text-align: left;
-    }
-    #editModal button {
-      padding: 10px 25px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    #editModal .save-btn {
-      background-color: #27ae60;
-      color: white;
-      margin-left: 10px;
-    }
-    #editModal .save-btn:hover {
-      background-color: #219150;
-    }
-    #editModal .cancel-btn {
-      background-color: #ccc;
-      color: #444;
-    }
-    #editModal .cancel-btn:hover {
-      background-color: #aaa;
-    }
+    body { font-family: 'Tahoma'; background: #f5f5f5; margin:0; padding:0; text-align:center; }
+    header { background:#4a90e2; color:#fff; padding:1rem; font-size:1.5rem; }
+    .container { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:20px; padding:20px; }
+    .card { background:#fff; border-radius:10px; padding:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer; }
+    .card:hover { transform:scale(1.05); }
+    .card-title { margin-top:.5rem; font-size:1.1rem; }
+    .section { display:none; padding:20px; max-width:900px; margin:auto; text-align:right; }
+    input, select, button { width:100%; padding:10px; margin:5px 0; font-size:1rem; box-sizing:border-box; }
+    table { width:100%; border-collapse:collapse; background:#fff; margin-top:20px; }
+    th, td { border:1px solid #ccc; padding:10px; text-align:center; }
+    .btn-small { padding:5px 10px; font-size:.8rem; margin:0 3px; border:none; border-radius:4px; cursor:pointer; }
+    .btn-edit { background:#27ae60; color:#fff; }
+    .btn-delete { background:#e74c3c; color:#fff; }
+    .btn-sell { background:#2ecc71; color:#fff; font-weight:bold; }
+    .action-buttons { display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); gap:5px; }
+    .name-cell { position:relative; cursor:pointer; }
+    .name-cell.show-actions .action-buttons { display:flex; }
+    .status-available { color:darkgreen; font-weight:bold; }
+    .status-unavailable { color:red; font-weight:bold; }
+    #editModal { display:none; position:fixed; top:0; right:0; bottom:0; left:0; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:999; }
+    #editModal .modal-content { background:#fff; padding:20px; border-radius:15px; width:90%; max-width:500px; animation:fadeInScale .3s ease forwards; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+    @keyframes fadeInScale { from {opacity:0;transform:scale(.8);} to {opacity:1;transform:scale(1);} }
+    .suggestion-box { position:absolute; background:#fff; border:1px solid #ccc; width:100%; max-height:150px; overflow-y:auto; display:none; text-align:right; z-index:1000; }
+    .suggestion-box div { padding:8px; cursor:pointer; border-bottom:1px solid #eee; }
+    .suggestion-box div:hover { background:#f0f0f0; }
+    .report-btn { margin-top:20px; padding:10px 15px; border:none; border-radius:6px; cursor:pointer; background:#007bff; color:#fff; }
   </style>
 </head>
 <body>
-
 <header>Muhammad Ali - محمد علي </header>
 
 <div id="mainMenu" class="container">
   <div class="card" onclick="showSection('inventorySection')">
-    <img src="https://img.icons8.com/dusk/64/box.png" alt="المخزون" />
-    <div class="card-title">الهواتف الجديده</div>
+    <img src="https://img.icons8.com/dusk/64/box.png"/><div class="card-title">الهواتف الجديدة</div>
   </div>
   <div class="card" onclick="showSection('usedInventorySection')">
-    <img src="https://img.icons8.com/dusk/64/open-box.png" alt="المستعمل" />
-    <div class="card-title">الهواتف المستعمل</div>
+    <img src="https://img.icons8.com/dusk/64/open-box.png"/><div class="card-title">الهواتف المستعمله </div>
   </div>
   <div class="card" onclick="showSection('salesSection')">
-    <img src="https://img.icons8.com/dusk/64/shopping-cart.png" alt="المبيعات" />
-    <div class="card-title">المبيعات</div>
+    <img src="https://img.icons8.com/dusk/64/shopping-cart.png"/><div class="card-title">المبيعات</div>
   </div>
   <div class="card" onclick="showSection('reportsSection')">
-    <img src="https://img.icons8.com/dusk/64/combo-chart.png" alt="التقارير" />
-    <div class="card-title">التقارير</div>
+    <img src="https://img.icons8.com/dusk/64/combo-chart.png"/><div class="card-title">التقارير</div>
   </div>
 </div>
 
-<!-- قسم المخزون الأساسي -->
+<!-- المخزون الأساسي -->
 <div id="inventorySection" class="section">
-  <button onclick="goBack()">رجوع</button>
-  <h2>الهواتف الجديدة</h2>
-  <input id="invName" placeholder="اسم الجهاز" />
-  <input id="invType" placeholder="النوع" />
-  <input id="invRam" placeholder="الرام" />
-  <input id="invStorage" placeholder="الذاكرة" />
-  <input id="invQty" type="number" placeholder="الكمية" />
-  <button onclick="addDevice('inventory')">إضافة</button>
+  <button onclick="goBack()">رجوع</button><h2>الهواتف الجديدة</h2>
+  <div style="position:relative;">
+    <input id="invName" placeholder="اسم الجهاز" autocomplete="off" oninput="showNameSuggestions(this,'sugInv')" />
+    <div id="sugInv" class="suggestion-box"></div>
+  </div>
+  <input id="invType" placeholder="النوع"/><input id="invRam" placeholder="الرام"/><input id="invStorage" placeholder="الذاكرة"/>
+  <input id="invQty" type="number" placeholder="الكمية"/><button onclick="addDevice('inventory')">إضافة</button>
   <table>
-    <thead>
-      <tr>
-        <th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ الإضافة</th><th>الحالة</th>
-      </tr>
-    </thead>
+    <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ الإضافة</th><th>الحالة</th></tr></thead>
     <tbody id="inventoryTable"></tbody>
   </table>
 </div>
 
-<!-- قسم مخزن المستعمل -->
+<!-- مخزن المستعمل -->
 <div id="usedInventorySection" class="section">
-  <button onclick="goBack()">رجوع</button>
-  <h2>الهواتف المستعملة</h2>
-  <input id="usedName" placeholder="اسم الجهاز" />
-  <input id="usedType" placeholder="النوع" />
-  <input id="usedRam" placeholder="الرام" />
-  <input id="usedStorage" placeholder="الذاكرة" />
-  <input id="usedQty" type="number" placeholder="الكمية" />
-  <button onclick="addDevice('used')">إضافة</button>
+  <button onclick="goBack()">رجوع</button><h2>الهواتف المستعملة</h2>
+  <div style="position:relative;">
+    <input id="usedName" placeholder="اسم الجهاز" autocomplete="off" oninput="showNameSuggestions(this,'sugUsed')" />
+    <div id="sugUsed" class="suggestion-box"></div>
+  </div>
+  <input id="usedType" placeholder="النوع"/><input id="usedRam" placeholder="الرام"/><input id="usedStorage" placeholder="الذاكرة"/>
+  <input id="usedQty" type="number" placeholder="الكمية"/><button onclick="addDevice('used')">إضافة</button>
   <table>
-    <thead>
-      <tr>
-        <th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ الإضافة</th><th>الحالة</th>
-      </tr>
-    </thead>
+    <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ الإضافة</th><th>الحالة</th></tr></thead>
     <tbody id="usedInventoryTable"></tbody>
   </table>
 </div>
 
-<!-- قسم المبيعات -->
+<!-- المبيعات -->
 <div id="salesSection" class="section" style="position:relative;">
-  <button onclick="goBack()">رجوع</button>
-  <h2>بيع جهاز</h2>
+  <button onclick="goBack()">رجوع</button><h2>بيع جهاز</h2>
   <select id="sourceSelect" onchange="clearSaleInputs(); hideSuggestions();">
-    <option value="inventory"> الهواتف الجديده</option>
-    <option value="used">الهواتف المستعمل</option>
+    <option value="inventory">المخزون الأساسي</option>
+    <option value="used">مخزن المستعمل</option>
   </select>
-  <div style="position: relative;">
+  <div style="position:relative;">
     <input id="saleName" placeholder="اسم الجهاز" autocomplete="off" oninput="showSuggestions()" />
-    <div id="suggestions" style="display:none;position:absolute; background:#fff; width:100%; max-height:150px; overflow-y:auto; border:1px solid #ccc; z-index:1000; text-align:right;"></div>
+    <div id="suggestions" class="suggestion-box"></div>
   </div>
-  <input id="saleType" placeholder="النوع" readonly />
-  <input id="saleRam" placeholder="الرام" readonly />
-  <input id="saleStorage" placeholder="الذاكرة" readonly />
-  <input id="saleQty" type="number" placeholder="الكمية" />
+  <input id="saleType" placeholder="النوع" readonly/><input id="saleRam" placeholder="الرام" readonly/>
+  <input id="saleStorage" placeholder="الذاكرة" readonly/><input id="saleQty" type="number" placeholder="الكمية"/>
   <button class="btn-sell" onclick="sellDevice()">بيع</button>
-
-  <!-- جدول سجل المبيعات -->
   <h3>سجل المبيعات</h3>
   <table>
-    <thead>
-      <tr>
-        <th>الاسم</th>
-        <th>النوع</th>
-        <th>الرام</th>
-        <th>الذاكرة</th>
-        <th>الكمية</th>
-        <th>تاريخ البيع</th>
-        <th>إجراءات</th>
-      </tr>
-    </thead>
+    <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ البيع</th><th>إجراءات</th></tr></thead>
     <tbody id="salesTable"></tbody>
   </table>
 </div>
 
-<!-- قسم التقارير -->
+<!-- التقارير -->
 <div id="reportsSection" class="section">
-  <button onclick="goBack()">رجوع</button>
-  <h2>تقرير المخازن والمبيعات</h2>
+  <button onclick="goBack()">رجوع</button><h2>تقرير المخازن والمبيعات</h2>
   <div id="reportContent"></div>
 </div>
 
-<!-- نافذة تعديل الهاتف -->
+<!-- نافذة التعديل -->
 <div id="editModal" class="hidden">
   <div class="modal-content">
     <h2>تعديل بيانات الهاتف</h2>
-    <label for="editName">الاسم:</label>
-    <input id="editName" type="text" />
-    <label for="editType">النوع:</label>
-    <input id="editType" type="text" />
-    <label for="editRam">الرام:</label>
-    <input id="editRam" type="text" />
-    <label for="editStorage">الذاكرة:</label>
-    <input id="editStorage" type="text" />
-    <label for="editQty">الكمية:</label>
-    <input id="editQty" type="number" min="0" />
-    <label for="editStatus">الحالة:</label>
-    <select id="editStatus">
-      <option value="متوفر">متوفر</option>
-      <option value="غير متوفر">غير متوفر</option>
-    </select>
-    <div class="buttons">
-      <button class="save-btn" onclick="saveEdit()">حفظ</button>
-      <button class="cancel-btn" onclick="closeEditModal()">إلغاء</button>
-    </div>
+    <label>الاسم:</label><input id="editName" type="text"/>
+    <label>النوع:</label><input id="editType" type="text"/>
+    <label>الرام:</label><input id="editRam" type="text"/>
+    <label>الذاكرة:</label><input id="editStorage" type="text"/>
+    <label>الكمية:</label><input id="editQty" type="number" min="0"/>
+    <label>الحالة:</label>
+    <select id="editStatus"><option value="متوفر">متوفر</option><option value="غير متوفر">غير متوفر</option></select>
+    <div class="buttons"><button class="save-btn" onclick="saveEdit()">حفظ</button><button class="cancel-btn" onclick="closeEditModal()">إلغاء</button></div>
   </div>
 </div>
 
 <script>
-  let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
-  let usedInventory = JSON.parse(localStorage.getItem('usedInventory')) || [];
-  let sales = JSON.parse(localStorage.getItem('sales')) || [];
+  let inventory = JSON.parse(localStorage.getItem('inventory'))||[];
+  let usedInventory = JSON.parse(localStorage.getItem('usedInventory'))||[];
+  let sales = JSON.parse(localStorage.getItem('sales'))||[];
+  let editContext={};
 
-  let editContext = { type: null, index: null };
-
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-    if(id === 'reportsSection') renderReports();
-    if(id === 'inventorySection') renderTable('inventoryTable', inventory, 'inventory');
-    if(id === 'usedInventorySection') renderTable('usedInventoryTable', usedInventory, 'used');
-    if(id === 'salesSection') renderSalesTable();
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById('mainMenu').style.display='none';
+    document.getElementById(id).style.display='block';
+    if(id==='reportsSection') renderReports();
+    else if(id==='inventorySection') renderTable('inventoryTable',inventory,'inventory');
+    else if(id==='usedInventorySection') renderTable('usedInventoryTable',usedInventory,'used');
+    else if(id==='salesSection') renderSalesTable();
+  }
+  function goBack(){
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById('mainMenu').style.display='grid';
+    hideSuggestions(); clearSaleInputs(); closeEditModal();
   }
 
-  function goBack() {
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById('mainMenu').style.display = 'grid';
-    hideSuggestions();
-    clearSaleInputs();
-    closeEditModal();
+  function addDevice(type){
+    let p=type==='inventory'?'inv':'used';
+    let name=document.getElementById(p+'Name').value.trim(),
+        devT=document.getElementById(p+'Type').value.trim(),
+        ram=document.getElementById(p+'Ram').value.trim(),
+        stor=document.getElementById(p+'Storage').value.trim(),
+        qty=parseInt(document.getElementById(p+'Qty').value.trim());
+    if(!name||!devT||!ram||!stor||isNaN(qty)||qty<=0){alert('املأ كل الحقول');return;}
+    let dateAdded=new Date().toLocaleString(), status='متوفر';
+    let arr=type==='inventory'?inventory:usedInventory;
+    let idx=arr.findIndex(d=>d.name===name&&d.type===devT&&d.ram===ram&&d.storage===stor);
+    if(idx>-1){arr[idx].qty+=qty;arr[idx].dateAdded=dateAdded;arr[idx].status=status;}
+    else arr.push({name,type:devT,ram,storage:stor,qty,dateAdded,status});
+    arr.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
+    localStorage.setItem(type==='inventory'?'inventory':'usedInventory',JSON.stringify(arr));
+    renderTable(type==='inventory'?'inventoryTable':'usedInventoryTable',arr,type);
+    clearInputs(type);
   }
-
-  function addDevice(type) {
-    let name, devType, ram, storage, qty;
-    if (type === 'inventory') {
-      name = document.getElementById('invName').value.trim();
-      devType = document.getElementById('invType').value.trim();
-      ram = document.getElementById('invRam').value.trim();
-      storage = document.getElementById('invStorage').value.trim();
-      qty = parseInt(document.getElementById('invQty').value.trim());
-    } else {
-      name = document.getElementById('usedName').value.trim();
-      devType = document.getElementById('usedType').value.trim();
-      ram = document.getElementById('usedRam').value.trim();
-      storage = document.getElementById('usedStorage').value.trim();
-      qty = parseInt(document.getElementById('usedQty').value.trim());
-    }
-    if (!name || !devType || !ram || !storage || isNaN(qty) || qty <= 0) {
-      alert('يرجى تعبئة كل الحقول بشكل صحيح');
-      return;
-    }
-    const dateAdded = new Date().toLocaleString();
-    const status = "متوفر";
-    const data = { name, type: devType, ram, storage, qty, dateAdded, status };
-
-    let arr = type === 'inventory' ? inventory : usedInventory;
-    const idx = arr.findIndex(d => d.name === name && d.type === devType && d.ram === ram && d.storage === storage);
-    if (idx > -1) {
-      arr[idx].qty += qty;
-      arr[idx].dateAdded = dateAdded;
-      arr[idx].status = status;
-    } else {
-      arr.push(data);
-    }
-
-    if (type === 'inventory') {
-      inventory = arr;
-      localStorage.setItem('inventory', JSON.stringify(inventory));
-      renderTable('inventoryTable', inventory, 'inventory');
-      clearInputs('inventory');
-    } else {
-      usedInventory = arr;
-      localStorage.setItem('usedInventory', JSON.stringify(usedInventory));
-      renderTable('usedInventoryTable', usedInventory, 'used');
-      clearInputs('used');
-    }
+  function clearInputs(type){
+    ['Name','Type','Ram','Storage','Qty'].forEach(f=>document.getElementById((type==='inventory'?'inv':'used')+f).value='');
   }
-
-  function clearInputs(type) {
-    if (type === 'inventory') {
-      document.getElementById('invName').value = '';
-      document.getElementById('invType').value = '';
-      document.getElementById('invRam').value = '';
-      document.getElementById('invStorage').value = '';
-      document.getElementById('invQty').value = '';
-    } else if (type === 'used') {
-      document.getElementById('usedName').value = '';
-      document.getElementById('usedType').value = '';
-      document.getElementById('usedRam').value = '';
-      document.getElementById('usedStorage').value = '';
-      document.getElementById('usedQty').value = '';
-    }
-  }
-
-  function renderTable(tbodyId, arr, type) {
-    const tbody = document.getElementById(tbodyId);
-    tbody.innerHTML = '';
-    arr.forEach((d, i) => {
-      let statusClass = d.status === 'متوفر' ? 'status-available' : 'status-unavailable';
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
+  function renderTable(tbId,arr,type){
+    let tb=document.getElementById(tbId); tb.innerHTML='';
+    arr.forEach((d,i)=>{
+      let cl=d.status==='متوفر'?'status-available':'status-unavailable';
+      let tr=document.createElement('tr');
+      tr.innerHTML=`
         <td class="name-cell">${d.name}
           <div class="action-buttons">
-            <button class="btn-small btn-edit" onclick="openEditModal('${type}', ${i}); event.stopPropagation();">تعديل</button>
-            <button class="btn-small btn-delete" onclick="deleteDevice('${type}', ${i}); event.stopPropagation();">حذف</button>
+            <button class="btn-small btn-edit" onclick="openEditModal('${type}',${i});event.stopPropagation();">تعديل</button>
+            <button class="btn-small btn-delete" onclick="deleteDevice('${type}',${i});event.stopPropagation();">حذف</button>
           </div>
         </td>
-        <td>${d.type}</td>
-        <td>${d.ram}</td>
-        <td>${d.storage}</td>
-        <td>${d.qty}</td>
-        <td>${d.dateAdded}</td>
-        <td class="${statusClass}">${d.status}</td>
-      `;
-      // تفعيل زر الحذف والتعديل عند النقر على اسم الجهاز
-      const nameCell = tr.querySelector('.name-cell');
-      nameCell.onclick = () => {
-        nameCell.classList.toggle('show-actions');
-      };
-      tbody.appendChild(tr);
+        <td>${d.type}</td><td>${d.ram}</td><td>${d.storage}</td><td>${d.qty}</td><td>${d.dateAdded}</td><td class="${cl}">${d.status}</td>`;
+      tr.querySelector('.name-cell').onclick=()=>tr.querySelector('.name-cell').classList.toggle('show-actions');
+      tb.appendChild(tr);
     });
   }
-
-  function deleteDevice(type, index) {
-    if (!confirm('هل أنت متأكد من حذف الجهاز؟')) return;
-    if (type === 'inventory') {
-      inventory.splice(index, 1);
-      localStorage.setItem('inventory', JSON.stringify(inventory));
-      renderTable('inventoryTable', inventory, 'inventory');
-    } else {
-      usedInventory.splice(index, 1);
-      localStorage.setItem('usedInventory', JSON.stringify(usedInventory));
-      renderTable('usedInventoryTable', usedInventory, 'used');
-    }
+  function deleteDevice(type,i){
+    if(!confirm('تأكيد الحذف؟'))return;
+    let arr=type==='inventory'?inventory:usedInventory;
+    arr.splice(i,1); arr.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
+    localStorage.setItem(type==='inventory'?'inventory':'usedInventory',JSON.stringify(arr));
+    renderTable(type==='inventory'?'inventoryTable':'usedInventoryTable',arr,type);
   }
 
-  // تعديل بيانات الجهاز
-  function openEditModal(type, index) {
-    editContext.type = type;
-    editContext.index = index;
-    let arr = type === 'inventory' ? inventory : usedInventory;
-    let device = arr[index];
-    document.getElementById('editName').value = device.name;
-    document.getElementById('editType').value = device.type;
-    document.getElementById('editRam').value = device.ram;
-    document.getElementById('editStorage').value = device.storage;
-    document.getElementById('editQty').value = device.qty;
-    document.getElementById('editStatus').value = device.status;
-    document.getElementById('editModal').classList.remove('hidden');
+  function openEditModal(type,i){
+    editContext={type,i};
+    let d=(type==='inventory'?inventory:usedInventory)[i];
+    ['Name','Type','Ram','Storage'].forEach((f,idx)=>document.getElementById('edit'+f).value=[d.name,d.type,d.ram,d.storage][idx]);
+    document.getElementById('editQty').value=d.qty;
+    document.getElementById('editStatus').value=d.status;
+    document.getElementById('editModal').style.display='flex';
   }
-  function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
-  }
-  function saveEdit() {
-    let name = document.getElementById('editName').value.trim();
-    let typeName = document.getElementById('editType').value.trim();
-    let ram = document.getElementById('editRam').value.trim();
-    let storage = document.getElementById('editStorage').value.trim();
-    let qty = parseInt(document.getElementById('editQty').value.trim());
-    let status = document.getElementById('editStatus').value;
-
-    if (!name || !typeName || !ram || !storage || isNaN(qty) || qty < 0) {
-      alert('يرجى تعبئة كل الحقول بشكل صحيح');
-      return;
-    }
-
-    let arr = editContext.type === 'inventory' ? inventory : usedInventory;
-    let index = editContext.index;
-    arr[index] = { name, type: typeName, ram, storage, qty, dateAdded: arr[index].dateAdded, status };
-
-    if(editContext.type === 'inventory') {
-      inventory = arr;
-      localStorage.setItem('inventory', JSON.stringify(inventory));
-      renderTable('inventoryTable', inventory, 'inventory');
-    } else {
-      usedInventory = arr;
-      localStorage.setItem('usedInventory', JSON.stringify(usedInventory));
-      renderTable('usedInventoryTable', usedInventory, 'used');
-    }
+  function closeEditModal(){document.getElementById('editModal').style.display='none';}
+  function saveEdit(){
+    let {type,i}=editContext;
+    let arr=type==='inventory'?inventory:usedInventory;
+    let n=document.getElementById('editName').value.trim(),
+        t=document.getElementById('editType').value.trim(),
+        r=document.getElementById('editRam').value.trim(),
+        s=document.getElementById('editStorage').value.trim(),
+        q=parseInt(document.getElementById('editQty').value.trim()),
+        st=document.getElementById('editStatus').value;
+    if(!n||!t||!r||!s||isNaN(q)||q<0){alert('خطأ');return;}
+    arr[i]={name:n,type:t,ram:r,storage:s,qty:q,dateAdded:arr[i].dateAdded,status:st};
+    arr.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
+    localStorage.setItem(type==='inventory'?'inventory':'usedInventory',JSON.stringify(arr));
+    renderTable(type==='inventory'?'inventoryTable':'usedInventoryTable',arr,type);
     closeEditModal();
   }
 
-  // --- قسم البيع ---
-
-  function clearSaleInputs() {
-    document.getElementById('saleName').value = '';
-    document.getElementById('saleType').value = '';
-    document.getElementById('saleRam').value = '';
-    document.getElementById('saleStorage').value = '';
-    document.getElementById('saleQty').value = '';
-  }
-
-  function hideSuggestions() {
-    document.getElementById('suggestions').style.display = 'none';
-  }
-
-  function showSuggestions() {
-    const input = document.getElementById('saleName');
-    const val = input.value.trim().toLowerCase();
-    const source = document.getElementById('sourceSelect').value;
-    const suggestionsDiv = document.getElementById('suggestions');
-
-    if (!val) {
-      suggestionsDiv.style.display = 'none';
-      return;
-    }
-
-    let sourceArr = source === 'inventory' ? inventory : usedInventory;
-
-    const matches = sourceArr.filter(d => d.name.toLowerCase().startsWith(val));
-    if (matches.length === 0) {
-      suggestionsDiv.style.display = 'none';
-      return;
-    }
-
-    suggestionsDiv.innerHTML = '';
-    matches.forEach(d => {
-      const div = document.createElement('div');
-      div.style.padding = '8px';
-      div.style.borderBottom = '1px solid #ddd';
-      div.style.cursor = 'pointer';
-      div.textContent = `${d.name} - ${d.type} - ${d.ram} - ${d.storage} (الكمية المتبقية: ${d.qty})`;
-      div.onclick = () => {
-        document.getElementById('saleName').value = d.name;
-        document.getElementById('saleType').value = d.type;
-        document.getElementById('saleRam').value = d.ram;
-        document.getElementById('saleStorage').value = d.storage;
-        document.getElementById('saleQty').value = 1;
-        suggestionsDiv.style.display = 'none';
+  function clearSaleInputs(){['saleName','saleType','saleRam','saleStorage','saleQty'].forEach(id=>document.getElementById(id).value='');}
+  function hideSuggestions(){document.getElementById('suggestions').style.display='none';}
+  function showSuggestions(){
+    let v=document.getElementById('saleName').value.trim().toLowerCase();
+    let src=document.getElementById('sourceSelect').value;
+    let arr=src==='inventory'?inventory:usedInventory;
+    let box=document.getElementById('suggestions'); box.innerHTML='';
+    if(!v){box.style.display='none';return;}
+    arr.filter(d=>d.name.toLowerCase().startsWith(v)).forEach(d=>{
+     let div = document.createElement('div');
+div.innerHTML = `${d.name} - ${d.type} - ${d.ram} - ${d.storage} <span style="color:green;font-weight:bold;">← الكمية: ${d.qty}</span>`;
+      div.style.cssText='padding:8px;border-bottom:1px solid #ddd;cursor:pointer';
+      div.onclick=()=>{
+        ['saleName','saleType','saleRam','saleStorage'].forEach((id,i)=>document.getElementById(id).value=[d.name,d.type,d.ram,d.storage][i]);
+        document.getElementById('saleQty').value=1;box.style.display='none';
       };
-      suggestionsDiv.appendChild(div);
+      box.appendChild(div);
     });
-    suggestionsDiv.style.display = 'block';
+    box.style.display=box.children.length?'block':'none';
   }
-
-  function sellDevice() {
-    let name = document.getElementById('saleName').value.trim();
-    let typeName = document.getElementById('saleType').value.trim();
-    let ram = document.getElementById('saleRam').value.trim();
-    let storage = document.getElementById('saleStorage').value.trim();
-    let qty = parseInt(document.getElementById('saleQty').value.trim());
-    let source = document.getElementById('sourceSelect').value;
-
-    if (!name || !typeName || !ram || !storage || isNaN(qty) || qty <= 0) {
-      alert('يرجى تعبئة كل الحقول بشكل صحيح');
-      return;
-    }
-
-    let arr = source === 'inventory' ? inventory : usedInventory;
-    let idx = arr.findIndex(d =>
-      d.name === name && d.type === typeName && d.ram === ram && d.storage === storage
-    );
-
-    if (idx === -1) {
-      alert('الجهاز غير موجود في المخزن المحدد');
-      return;
-    }
-
-    if (arr[idx].qty < qty) {
-      alert('الكمية المطلوبة غير متوفرة');
-      return;
-    }
-
-    arr[idx].qty -= qty;
-    if (arr[idx].qty === 0) {
-      arr[idx].status = 'غير متوفر';
-    }
-
-    // حفظ التغييرات في المخزن
-    if (source === 'inventory') {
-      inventory = arr;
-      localStorage.setItem('inventory', JSON.stringify(inventory));
-      renderTable('inventoryTable', inventory, 'inventory');
-    } else {
-      usedInventory = arr;
-      localStorage.setItem('usedInventory', JSON.stringify(usedInventory));
-      renderTable('usedInventoryTable', usedInventory, 'used');
-    }
-
-    // إضافة سجل البيع
-    let date = new Date().toLocaleString();
-    sales.push({ name, type: typeName, ram, storage, qty, date });
-    localStorage.setItem('sales', JSON.stringify(sales));
-    renderSalesTable();
-
-    clearSaleInputs();
+  function sellDevice(){
+    let n=document.getElementById('saleName').value.trim(),t=document.getElementById('saleType').value.trim(),
+        r=document.getElementById('saleRam').value.trim(),s=document.getElementById('saleStorage').value.trim(),
+        q=parseInt(document.getElementById('saleQty').value.trim()),src=document.getElementById('sourceSelect').value;
+    if(!n||!t||!r||!s||isNaN(q)||q<=0){alert('خطأ');return;}
+    let arr=src==='inventory'?inventory:usedInventory, idx=arr.findIndex(d=>d.name===n&&d.type===t&&d.ram===r&&d.storage===s);
+    if(idx<0||arr[idx].qty<q){alert('غير متوفر');return;}
+    arr[idx].qty-=q; if(!arr[idx].qty) arr[idx].status='غير متوفر';
+    arr.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
+    localStorage.setItem(src,JSON.stringify(arr));
+    renderTable(src==='inventory'?'inventoryTable':'usedInventoryTable',arr,src);
+    sales.push({name:n,type:t,ram:r,storage:s,qty:q,date:new Date().toLocaleString()});
+    localStorage.setItem('sales',JSON.stringify(sales));
+    renderSalesTable(); clearSaleInputs();
   }
-
-  function renderSalesTable() {
-    const tbody = document.getElementById('salesTable');
-    tbody.innerHTML = '';
-    sales.forEach((sale, i) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${sale.name}</td>
-        <td>${sale.type}</td>
-        <td>${sale.ram}</td>
-        <td>${sale.storage}</td>
-        <td>${sale.qty}</td>
-        <td>${sale.date}</td>
-        <td><button class="btn-delete btn-small" onclick="deleteSale(${i})">حذف</button></td>
-      `;
-      tbody.appendChild(tr);
+  function renderSalesTable(){
+    let tb=document.getElementById('salesTable'); tb.innerHTML='';
+    sales.forEach((s,i)=>{
+      let tr=document.createElement('tr');
+      tr.innerHTML=`<td>${s.name}</td><td>${s.type}</td><td>${s.ram}</td><td>${s.storage}</td><td>${s.qty}</td><td>${s.date}</td><td><button class="btn-delete btn-small" onclick="deleteSale(${i})">حذف</button></td>`;
+      tb.appendChild(tr);
     });
   }
-
-  function deleteSale(index) {
-    if (!confirm('هل أنت متأكد من حذف عملية البيع؟ سيتم إعادة الكمية إلى المخزن.')) return;
-    let sale = sales[index];
-    // إعادة الكمية إلى المخزن
-    let arr = inventory.find(d =>
-      d.name === sale.name && d.type === sale.type && d.ram === sale.ram && d.storage === sale.storage
-    ) ? inventory : usedInventory;
-    let idx = arr.findIndex(d =>
-      d.name === sale.name && d.type === sale.type && d.ram === sale.ram && d.storage === sale.storage
-    );
-    if (idx > -1) {
-      arr[idx].qty += sale.qty;
-      arr[idx].status = 'متوفر';
-    }
-
-    if (arr === inventory) {
-      localStorage.setItem('inventory', JSON.stringify(inventory));
-      renderTable('inventoryTable', inventory, 'inventory');
-    } else {
-      localStorage.setItem('usedInventory', JSON.stringify(usedInventory));
-      renderTable('usedInventoryTable', usedInventory, 'used');
-    }
-
-    sales.splice(index, 1);
-    localStorage.setItem('sales', JSON.stringify(sales));
-    renderSalesTable();
+  function deleteSale(i){
+    if(!confirm('تأكيد؟'))return;
+    let s=sales[i];
+    let arr=inventory.find(d=>d.name===s.name)?inventory:usedInventory;
+    let idx=arr.findIndex(d=>d.name===s.name&&d.ram===s.ram&&d.storage===s.storage);
+    if(idx>-1){arr[idx].qty+=s.qty;arr[idx].status='متوفر';}
+    arr.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
+    localStorage.setItem(arr===inventory?'inventory':'usedInventory',JSON.stringify(arr));
+    renderTable(arr===inventory?'inventoryTable':'usedInventoryTable',arr,arr===inventory?'inventory':'used');
+    sales.splice(i,1); localStorage.setItem('sales',JSON.stringify(sales)); renderSalesTable();
   }
 
-  // --- قسم التقارير ---
-
-  function renderReports() {
-    let reportDiv = document.getElementById('reportContent');
-    let totalInventory = inventory.reduce((acc, d) => acc + d.qty, 0);
-    let totalUsed = usedInventory.reduce((acc, d) => acc + d.qty, 0);
-    let totalSales = sales.reduce((acc, d) => acc + d.qty, 0);
-
-    reportDiv.innerHTML = `
-      <p>إجمالي الهواتف الجديدة في المخزون: <strong>${totalInventory}</strong></p>
-      <p>إجمالي الهواتف المستعملة في المخزون: <strong>${totalUsed}</strong></p>
-      <p>إجمالي الهواتف المباعة: <strong>${totalSales}</strong></p>
+  function renderReports(){
+    const getTypeCount=arr=>new Set(arr.map(d=>`${d.name}|${d.type}|${d.ram}|${d.storage}`)).size;
+    let invTypes=getTypeCount(inventory), invTotal=inventory.reduce((a,d)=>a+d.qty,0);
+    let usedTypes=getTypeCount(usedInventory), usedTotal=usedInventory.reduce((a,d)=>a+d.qty,0);
+    let salesCount=sales.length, salesTotal=sales.reduce((a,d)=>a+d.qty,0);
+    document.getElementById('reportContent').innerHTML=`
+      <h3>📦 المخزون الأساسي</h3>
+      <p>عدد الأنواع المختلفة: <strong>${invTypes}</strong></p>
+      <p>إجمالي الأجهزة: <strong>${invTotal}</strong></p>
+      <h3>♻️ المخزون المستعمل</h3>
+      <p>عدد الأنواع المختلفة: <strong>${usedTypes}</strong></p>
+      <p>إجمالي الأجهزة: <strong>${usedTotal}</strong></p>
+      <h3>🛒 المبيعات</h3>
+      <p>عدد عمليات البيع: <strong>${salesCount}</strong></p>
+      <p>عدد الأجهزة المباعة: <strong>${salesTotal}</strong></p>
+      <button class="report-btn" onclick="printAllAndReset()">🧾 طباعة كل المخازن والمبيعات والتصفير</button>
     `;
   }
 
-  // تحميل الجداول عند فتح الصفحة إذا كانت مفتوحة مباشرة
-  window.onload = function() {
-    renderTable('inventoryTable', inventory, 'inventory');
-    renderTable('usedInventoryTable', usedInventory, 'used');
-    renderSalesTable();
+  function printAllAndReset(){
+    // تضمين التقارير كاملة
+    let repHTML = document.getElementById('reportContent').innerHTML;
+    let invRows = inventory.map(d=>`<tr><td>${d.name}</td><td>${d.type}</td><td>${d.ram}</td><td>${d.storage}</td><td>${d.qty}</td></tr>`).join('');
+    let usedRows = usedInventory.map(d=>`<tr><td>${d.name}</td><td>${d.type}</td><td>${d.ram}</td><td>${d.storage}</td><td>${d.qty}</td></tr>`).join('');
+    let saleRows = sales.map(s=>`<tr><td>${s.name}</td><td>${s.type}</td><td>${s.ram}</td><td>${s.storage}</td><td>${s.qty}</td><td>${s.date}</td></tr>`).join('');
+    let html = `
+    <html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>تقرير شامل</title></head>
+      <body style="font-family:Tahoma;text-align:right;">
+        <h2 style="text-align:center;">📊 تقرير شامل قبل التصفير</h2>
+        ${repHTML}
+        <h3>📦 بيانات المخزون الأساسي</h3>
+        <table border="1" style="width:100%;border-collapse:collapse;text-align:center;">
+          <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th></tr></thead><tbody>${invRows}</tbody>
+        </table>
+        <h3>♻️ بيانات المخزن المستعمل</h3>
+        <table border="1" style="width:100%;border-collapse:collapse;text-align:center;">
+          <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th></tr></thead><tbody>${usedRows}</tbody>
+        </table>
+        <h3>🛒 سجل المبيعات</h3>
+        <table border="1" style="width:100%;border-collapse:collapse;text-align:center;">
+          <thead><tr><th>الاسم</th><th>النوع</th><th>الرام</th><th>الذاكرة</th><th>الكمية</th><th>تاريخ البيع</th></tr></thead><tbody>${saleRows}</tbody>
+        </table>
+      </body></html>`;
+    let w=window.open('','_blank','width=900,height=600');
+    w.document.write(html); w.document.close(); w.print();
+    localStorage.removeItem('sales'); sales=[]; renderSalesTable(); renderReports();
   }
-</script>
 
+  const deviceSuggestions=["سامسونج","ريدمي","انفنكس","هونر","ايتل","تكنو"];
+  function showNameSuggestions(inp,boxId){
+    let v=inp.value.trim().toLowerCase(),box=document.getElementById(boxId);
+    box.innerHTML=''; if(!v)return box.style.display='none';
+    deviceSuggestions.filter(n=>n.toLowerCase().startsWith(v)).forEach(n=>{
+      let d=document.createElement('div');d.textContent=n;d.onclick=()=>{inp.value=n;box.style.display='none';};
+      box.appendChild(d);
+    });
+    box.style.display=box.children.length?'block':'none';
+  }
+
+  window.onload=function(){
+    renderTable('inventoryTable',inventory,'inventory');
+    renderTable('usedInventoryTable',usedInventory,'used');
+    renderSalesTable();
+  };
+  document.addEventListener('click',e=>{
+    if(!e.target.matches('#invName')&&!e.target.matches('#usedName')){
+      document.getElementById('sugInv').style.display='none';
+      document.getElementById('sugUsed').style.display='none';
+    }
+  });
+</script>
 </body>
 </html>
